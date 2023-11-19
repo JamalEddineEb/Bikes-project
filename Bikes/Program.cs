@@ -17,14 +17,16 @@ namespace ConsoleApp_for_Self_Hosted_WS
         static void Main(string[] args)
         {
 
+
             ServiceHost host = new ServiceHost(typeof(BikeService));
 
 
             //Start the Service
             host.Open();
+            string uri = "http://localhost:8733/Design_Time_Addresses/Bikes/Service1/";
 
             Console.WriteLine("Service is host at " + DateTime.Now.ToString());
-            Console.WriteLine("Host is running... Press <Enter> key to stop");
+            Console.WriteLine($"Host is running... at {uri} Press <Enter> key to stop");
             Console.ReadLine();
 
         }

@@ -1,4 +1,5 @@
-﻿using http_console;
+﻿using Bikes;
+using Bikes.Data_types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,28 @@ namespace Bikes
     {
 
         [OperationContract]
-        Task<List<Contract>> GetContracts(string stationName);
+        Task<List<Station>> GetStationsFromAddress(string address);
 
         [OperationContract]
-        Task<string> GetCity(Position position);
+        Task<PositionStrings> getPositionFromAddress(string address);
 
         [OperationContract]
-        Task<List<Station>> GetStations(string contractName);
+        Task<double> CalculateDistance(string origin, string destination);
+
+        [OperationContract]
+        Task<Station> GetNearestStation(string address);
+
+        /*[OperationContract]
+        Task<List<Contract>> GetContracts(string stationName);   
+
+        [OperationContract]
+        Task<string> GetCityFromPosition(Position position);
+
+        [OperationContract]
+        Task<List<Place>> GetPlacesFromAddress(string address);
+
+        [OperationContract]
+        Task<List<Station>> GetStations(string contractName);*/
 
 
         // TODO: ajoutez vos opérations de service ici

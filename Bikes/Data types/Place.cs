@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bikes.Data_types
 {
-    public class Localistaion
+
+    public class Place
     {
         public Address address {  get; set; }
     }
