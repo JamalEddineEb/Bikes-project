@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8090/MyService/CacheProxyServer/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BikesServer" />
+  <xs:import schemaLocation="http://localhost:8090/MyService/CacheProxyServer/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:element name="GetStations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CacheItemName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStationsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BikesServer" minOccurs="0" name="GetStationsResult" nillable="true" type="q1:ArrayOfStation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeStationstWithSeconds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CacheItemName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="dt_seconds" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeStationstWithSecondsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BikesServer" minOccurs="0" name="GeStationstWithSecondsResult" nillable="true" type="q2:ArrayOfStation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeStationstWithOffset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CacheItemName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="dt" type="q3:DateTimeOffset" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeStationstWithOffsetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BikesServer" minOccurs="0" name="GeStationstWithOffsetResult" nillable="true" type="q4:ArrayOfStation" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
