@@ -70,23 +70,17 @@ namespace Bikes
 
         }
 
-        public async Task<List<List<double>>> GetFootCoordinates(string origin, string destination)
+        public async Task<List<List<double>>> GetFootCoordinates(string originLon, string originLat, string destinationLon, string destinationLat)
         {
-            PositionStrings originPosition = await getPositionFromAddress(origin);
-            PositionStrings destinationPosition = await getPositionFromAddress(destination);
-
-            string uri = $"https://api.openrouteservice.org/v2/directions/foot-walking?api_key={routingApiKey}&start={originPosition.lon},{originPosition.lat}&end={destinationPosition.lon},{destinationPosition.lat}";
+            string uri = $"https://api.openrouteservice.org/v2/directions/foot-walking?api_key={routingApiKey}&start={originLon},{originLat}&end={destinationLon},{destinationLat}";
             Routing routing = await GetRouting(uri);
             return routing.features[0].geometry.coordinates;
 
         }
 
-        public async Task<List<List<double>>> GetCyclingCoordinates(string origin, string destination)
+        public async Task<List<List<double>>> GetCyclingCoordinates(string originLon, string originLat, string destinationLon, string destinationLat)
         {
-            PositionStrings originPosition = await getPositionFromAddress(origin);
-            PositionStrings destinationPosition = await getPositionFromAddress(destination);
-
-            string uri = $"https://api.openrouteservice.org/v2/directions/cycling-regular?api_key={routingApiKey}&start={originPosition.lon},{originPosition.lat}&end={destinationPosition.lon},{destinationPosition.lat}";
+            string uri = $"https://api.openrouteservice.org/v2/directions/cycling-regular?api_key={routingApiKey}&start={originLon},{originLat}&end={destinationLon},{destinationLat}";
             Routing routing = await GetRouting(uri);
             return routing.features[0].geometry.coordinates;
 
@@ -196,34 +190,39 @@ namespace Bikes
             {
                 var nearestStationOriginResult = await GetNearestStationWithAvailableBikes(origin);
                 var nearestStationDestinationResult = await GetNearestStationWithAvailableBikeStands(destination);
+                Position nearestStationOrigin = nearestStationOriginResult.position;
+                Position nearestStationDestination = nearestStationDestinationResult.position;
+
+                PositionStrings originPosition = await getPositionFromAddress(origin);
+                PositionStrings destinationPosition = await getPositionFromAddress(destination);
+
 
                 // Check if either result is null
                 if (nearestStationOriginResult == null || nearestStationDestinationResult == null)
                 {
                     // Handle the case where the closest station is null
                     // Assuming the person has to go on foot for the entire distance
-                    List<List<double>> footCoordinates = await GetFootCoordinates(origin, destination);
+                    List<List<double>> footCoordinates = await GetFootCoordinates(originPosition.lon, originPosition.lat, destinationPosition.lon, destinationPosition.lat);
                     return (walkingCoordinates: footCoordinates, type: new List<string> { "walking" });
                 }
 
-                string nearestStationOrigin = nearestStationOriginResult.address+", "+nearestStationOriginResult.contract_name;
-                string nearestStationDestination = nearestStationDestinationResult.address+", "+nearestStationDestinationResult.contract_name;
 
-                double distanceToOriginStation = await CalculateDistance(origin, nearestStationOrigin);
-                double distanceStationToDestination = await CalculateDistance(destination, nearestStationDestination);
+
+                double distanceToOriginStation = await CalculateDistance(originPosition.lon, originPosition.lat, nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture));
+                double distanceStationToDestination = await CalculateDistance(destinationPosition.lon, destinationPosition.lat, nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture));
 
                 double distanceToDestination = await CalculateDistance(origin, destination);
                 if (distanceToOriginStation + distanceStationToDestination >= distanceToDestination)
                 {
                     // If walking is preferred due to distance
-                    List<List<double>> footCoordinates = await GetFootCoordinates(origin, destination);
+                    List<List<double>> footCoordinates = await GetFootCoordinates(originPosition.lon, originPosition.lat, destinationPosition.lon, destinationPosition.lat);
                     return (walkingCoordinates: footCoordinates, type: Enumerable.Repeat("walking", footCoordinates.Count).ToList());
                 }
                 else
                 {
-                    List<List<double>> footCoordinates1 = await GetFootCoordinates(origin, nearestStationOrigin);
-                    List<List<double>> cyclingCoordinates = await GetCyclingCoordinates(nearestStationOrigin, nearestStationDestination);
-                    List<List<double>> footCoordinates2 = await GetFootCoordinates(nearestStationDestination, destination);
+                    List<List<double>> footCoordinates1 = await GetFootCoordinates(originPosition.lon, originPosition.lat, nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture));
+                    List<List<double>> cyclingCoordinates = await GetCyclingCoordinates(nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture));
+                    List<List<double>> footCoordinates2 = await GetFootCoordinates(nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture), destinationPosition.lon, destinationPosition.lat);
 
                     List<List<double>> walkingCoordinates = new List<List<double>>();
                     walkingCoordinates.AddRange(footCoordinates1);
@@ -248,8 +247,8 @@ namespace Bikes
                 }
                 catch (Exception)
                 {*/
-                    throw new Exception(ex.Message);
-               //}
+                throw new Exception(ex.Message);
+                //}
             }
         }
 
@@ -327,7 +326,7 @@ namespace Bikes
             try
             {
                 string uri = $"https://api.jcdecaux.com/vls/v1/stations?contract={city}&apiKey={jcdecauxApiKey}";
-                return (await stationsProxy.GetStationsAsync(uri));
+                return (await stationsProxy.GeStationstWithSecondsAsync(uri,3000));
             }
             catch (Exception ex)
             {

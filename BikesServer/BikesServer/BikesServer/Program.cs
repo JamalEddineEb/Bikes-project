@@ -44,8 +44,7 @@ namespace BikesServer
                 smb.HttpGetEnabled = true;
                 host.Description.Behaviors.Add(smb);
 
-                /*Step[] steps = await service.GetItinerarySteps("88 Boulevard de Strasbourg,toulouse", "71 Rue Renan,Lyon");
-                List<String> types = (await service.GetItineraryCoordinates("88 Boulevard de Strasbourg,toulouse", "71 Rue Renan,Lyon")).type;*/
+                //List<String> types = (await service.GetItineraryCoordinates("88 Boulevard de Strasbourg,toulouse", "71 Rue Renan,Lyon")).type;
 
 
                 //Start the Service
