@@ -208,8 +208,8 @@ namespace Bikes
 
 
 
-                double distanceToOriginStation = await CalculateDistance(originPosition.lon, originPosition.lat, nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture));
-                double distanceStationToDestination = await CalculateDistance(destinationPosition.lon, destinationPosition.lat, nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture));
+                double distanceToOriginStation = await CalculateDistance(originPosition.lon, originPosition.lat, toInvariantString(nearestStationOrigin.lng), toInvariantString(nearestStationOrigin.lat));
+                double distanceStationToDestination = await CalculateDistance(destinationPosition.lon, destinationPosition.lat, toInvariantString(nearestStationDestination.lng), toInvariantString(nearestStationDestination.lat));
 
                 double distanceToDestination = await CalculateDistance(origin, destination);
                 if (distanceToOriginStation + distanceStationToDestination >= distanceToDestination)
@@ -220,9 +220,9 @@ namespace Bikes
                 }
                 else
                 {
-                    List<List<double>> footCoordinates1 = await GetFootCoordinates(originPosition.lon, originPosition.lat, nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture));
-                    List<List<double>> cyclingCoordinates = await GetCyclingCoordinates(nearestStationOrigin.lng.ToString(CultureInfo.InvariantCulture), nearestStationOrigin.lat.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture));
-                    List<List<double>> footCoordinates2 = await GetFootCoordinates(nearestStationDestination.lng.ToString(CultureInfo.InvariantCulture), nearestStationDestination.lat.ToString(CultureInfo.InvariantCulture), destinationPosition.lon, destinationPosition.lat);
+                    List<List<double>> footCoordinates1 = await GetFootCoordinates(originPosition.lon, originPosition.lat, toInvariantString(nearestStationOrigin.lng), toInvariantString(nearestStationOrigin.lat));
+                    List<List<double>> cyclingCoordinates = await GetCyclingCoordinates(toInvariantString(nearestStationOrigin.lng), toInvariantString(nearestStationOrigin.lat), toInvariantString(nearestStationDestination.lng), toInvariantString(nearestStationDestination.lat));
+                    List<List<double>> footCoordinates2 = await GetFootCoordinates(toInvariantString(nearestStationDestination.lng), toInvariantString(nearestStationDestination.lat), destinationPosition.lon, destinationPosition.lat);
 
                     List<List<double>> walkingCoordinates = new List<List<double>>();
                     walkingCoordinates.AddRange(footCoordinates1);
@@ -239,17 +239,25 @@ namespace Bikes
             }
             catch (Exception ex)
             {
-                /*try
+                try
                 {
                     // Handle exceptions, returning walking as a default type
-                    List<List<double>> footCoordinates = await GetFootCoordinates(origin, destination);
+                    PositionStrings originPosition = await getPositionFromAddress(origin);
+                    PositionStrings destinationPosition = await getPositionFromAddress(destination);
+
+                    List<List<double>> footCoordinates = await GetFootCoordinates(originPosition.lon, originPosition.lat, destinationPosition.lon, destinationPosition.lat);
                     return (walkingCoordinates: footCoordinates, type: Enumerable.Repeat("walking", footCoordinates.Count).ToList());
                 }
                 catch (Exception)
-                {*/
+                {
                 throw new Exception(ex.Message);
-                //}
+                }
             }
+        }
+
+        private string toInvariantString(double d)
+        {
+            return d.ToString(CultureInfo.InvariantCulture);
         }
 
 

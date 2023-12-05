@@ -32,9 +32,6 @@ C:\Users\Abdel\OneDrive\Bureau\SI4\mwsoc\Bikes\BikesServer\BikesServer\BikesServ
 C:\Users\Abdel\OneDrive\Bureau\SI4\mwsoc\Bikes\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.csproj.CopyComplete
 C:\Users\Abdel\OneDrive\Bureau\SI4\mwsoc\Bikes\BikesServer\BikesServer\BikesServer\obj\Debug\ConsoleApp_for_Self_Hosted_WS.exe
 C:\Users\Abdel\OneDrive\Bureau\SI4\mwsoc\Bikes\BikesServer\BikesServer\BikesServer\obj\Debug\ConsoleApp_for_Self_Hosted_WS.pdb
-C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\ConsoleApp_for_Self_Hosted_WS.exe.config
-C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\ConsoleApp_for_Self_Hosted_WS.exe
-C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\ConsoleApp_for_Self_Hosted_WS.pdb
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\System.Buffers.dll
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\System.Memory.dll
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\System.Numerics.Vectors.dll
@@ -47,5 +44,8 @@ C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.csproj.AssemblyReference.cache
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.csproj.CoreCompileInputs.cache
 C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.csproj.CopyComplete
-C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\ConsoleApp_for_Self_Hosted_WS.exe
-C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\ConsoleApp_for_Self_Hosted_WS.pdb
+C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\BikesServer.exe.config
+C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\BikesServer.exe
+C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\bin\Debug\BikesServer.pdb
+C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.exe
+C:\Users\Abdel\OneDrive\Bureau\Bikes-project\BikesServer\BikesServer\BikesServer\obj\Debug\BikesServer.pdb

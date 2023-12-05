@@ -1,5 +1,4 @@
 
-f
-java:S3252{"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8ì•ºüÁ1
-O
-java:S1128"2Remove this unused import 'java.awt.geom.Point2D'.(ˆÕ­Ü8”¶»üÁ1
+H	java:S106‘"+Replace this use of System.out by a logger.(·„®8 “ô«Ã1
+g
+java:S3252§"IUse static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".(¢¡´8¤“ô«Ã1
